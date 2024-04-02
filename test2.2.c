@@ -1,0 +1,1041 @@
+#define  _CRT_SECURE_NO_WARNINGS 1
+#include <stdio.h>
+#include<math.h>
+
+//Fibionacci 数列的第n项 (使用递归)
+//int Fibonacci(int n)
+//{
+//	if (n == 1 || n == 2)
+//	{
+//		return 1;
+//	}
+//	else if (n > 2)
+//	{
+//		return Fibonacci(n - 1) + Fibonacci(n - 2);
+//	}
+//}
+//int main()
+//{
+//	int n;
+//	scanf("%d", &n);
+//	printf("%d", Fibonacci(n));
+//	return 0;
+//}
+
+//函数返回两个实数的和 (使用函数方法）
+//float add(float a, float b)
+//{
+//	return a + b;
+//}
+//int main()
+//{
+//	float a, b, c;
+//	scanf("%f %f", &a, &b);
+//	c = add(a, b);
+//	printf("%f", c);
+//	return 0;
+//}
+
+//从三个整数中找出最大值 (使用函数方法)
+//int add(int a, int b, int c)
+//{
+//	return a + b + c;
+//}
+//int main()
+//{
+//	int a, b, c, d;
+//	scanf("%d %d %d", &a, &b, &c);
+//	d = add(a, b, c);
+//	printf("%d", d);
+//	return 0;
+//}
+
+//求两个整数的最大值 (使用函数方法)
+//int max(int a, int b)
+//{
+//    if (a > b)
+//        return a;
+//    else
+//        return b;
+//}
+//int main()
+//{
+//    int a, b, c;
+//    scanf("%d %d", &a, &b);
+//    c = max(a, b);
+//    printf("The max is:%d.", c);
+//    return 0;
+//}
+
+//函数返回三个整数中最大的值 (使用函数方法)
+//第一种方法
+//int max(int a, int b, int c)
+//{
+//	if (a > b && a > c)
+//	{
+//		return a;
+//	}
+//	if (b > a && b > c)
+//	{
+//		return b;
+//	}
+//	if (c > a && c > b)
+//	{
+//		return c;
+//	}
+//}
+//int main()
+//{
+//	int a, b, c, d;
+//	scanf("%d %d %d", &a, &b, &c);
+//	d = max(a, b, c);
+//	printf("%d", d);
+//	return 0;
+//}
+
+//第二种方法
+//int max(int x, int y, int z)
+//{
+//	// 声明变量m，并将x的值赋给m
+//	int m = x;                    //这个进行“代换”的思想很重要，我还是要注意一下，有必要刻意地练习一下。
+//	// 如果y大于m，则将y的值赋给m
+//	if (y > m) m = y;             //m在这里是局部变量，只对函数内部有效，
+//	// 如果z大于m，则将z的值赋给m     //m是一个中间变量，可以作为临时变量使用
+//	if (z > m) m = z;
+//	// 返回m，即三个整数中的最大值
+//	return m;
+//}
+//int main()
+//{
+//	// 声明三个整数变量a, b, c
+//	int a, b, c;
+//	scanf("%d%d%d", &a, &b, &c);
+//	printf("%d\n", max(a, b, c));
+//	return 0;
+//}
+    //我现在写过的有关于函数的问题都是不用进行地址的传递的，但是我其实还是没有理解什么时候需要，什么时候不需要。多多学习。
+    //现在我写的函数都是“传值函数”，都是只用进行值传递，不用进行地址的传递。
+    //然后还有“传址函数”但是我还没有学到指针，所以这个先放一放。
+
+//打印素数 （不使用函数）
+//int main()
+//{
+//    int i, j, n;
+//    for (i = 1; i <= 100; i += 2)   //这里flag的作用是让1加进来，要是没有flag的话，就不会打印“1”了。
+//    {                               //因为1本身是素数，但是不会被打印的，所以这里要加上“flag”判断。
+//        int flag = 1;               //因为1 % 任何数字都 == 1，但是若是“用if （i == j）判断素数”的话，1就不会被打印。
+//        for (j = 2; j < i; j++)     //所以要用flag，这样就可以保证1可以被打印。
+//        {
+//            if (i % j == 0)           //例子：i = 101，j = 3，这时候不满足if的条件，所以根本就不会进入循环。
+//            {                         //若是i = 101，j = 2，这时候满足if的条件，所以会进入循环，然后break，跳出内层的for循环
+//                flag = 0;             //此时flag = 0，说明i不是素数，所以不会打印。
+//                break;
+//            }
+//        }
+//        if (flag == 1)
+//        {
+//            printf("%d ", i);
+//        }
+//    }
+//    return 0;
+//}
+
+//打印素数 （使用函数）
+//int isPrime(int n)
+//{
+//    int i;
+//    if (n == 1)
+//        return 0;
+//    for (i = 2; i <= n / 2; i++)
+//    {
+//        if (n % i == 0)
+//            return 0;        //若不是素数，则返回0
+//    }
+//    return 1;               //是素数，则返回1，而且对应的调用函数的时候，也要判断返回值是否为1。若是1，则打印。
+//}
+//int main()
+//{
+//    int i, j, n;
+//    for (i = 1; i <= 100; i += 2)
+//    {
+//        if (isPrime(i))     //调用函数进行判断，若是素数（为真），则打印。 若不是素数（为假），则不打印。
+//            printf("%d ", i);
+//    }
+//    return 0;
+//}
+
+
+
+//实数的四则运算
+//float add(float a, float b)
+//{
+//    return a + b;
+//}
+//float sub(float a, float b)
+//{
+//    return a - b;
+//}
+//float mul(float a, float b)
+//{
+//    return a * b;
+//}
+//float div(float a, float b)
+//{
+//    return a / b;
+//}
+//int main()
+//{
+//    float a, b, c, d, e, f;
+//    scanf("%f %f", &a, &b);
+//    c = add(a, b);
+//    d = sub(a, b);
+//    e = mul(a, b);
+//    f = div(a, b);
+//    printf("%f %f %f %f", c, d, e, f);
+//    return 0;
+//}
+
+//设计函数long next(long n){}，返回3n+1猜想中形式参数n的下一个值。例如：next(5)的值为16、next(16)的值为8等等。
+//主函数的功能为读入一个整数n，输出变换到1的过程
+//long next (long n)
+//{
+//    if (n % 2 == 0)
+//    {
+//        return  n / 2;
+//    }
+//    else if (n % 2 == 1)
+//    {
+//        return 3 * n + 1;
+//    }
+//}
+//int main() 
+//{
+//    long n, count = 0;
+//    scanf("%ld", &n);
+//    while (n != 1) 
+//    {
+//        count++;
+//        n = next(n);
+//        printf("Times of %ld is %ld.\n", count, n);
+//    }
+//    return 0;
+//}
+
+
+
+//设计主函数的功能为读入一个100分制的分数，输出5分制成绩
+//int get(int n)
+//{
+//    if (n >= 0 && n < 10)
+//        return 0;
+//    else if (n >= 10 && n < 40)
+//        return 1;
+//    else if (n >= 40 && n < 60)
+//        return 2;
+//    else if (n >= 60 && n < 70)
+//        return 3;
+//    else if (n >= 70 && n < 80)
+//        return 4;
+//    else if (n >= 80 && n <= 100)
+//        return 5;
+//    else
+//        return -1;
+//}
+//int main()
+//{
+//    int i, a;
+//    scanf("%d", &i);
+//    a = get(i);
+//    printf("%d", a);
+//    return 0;
+//}
+
+//编写函数返回形式参数（一个正整数）是否为回文数
+// 定义一个函数，找出指定范围内的所有回文数并打印
+//int palindromic(int n, int m)
+//{
+//	int i, j, k, count = 0;
+//	for (i = n; i <= m; i++)
+//	{
+//		// 初始化变量
+//		k = 0; j = i;     //k 用于存储反转后的数值。
+//		// 反转当前数值
+//		while (j)
+//		{
+//			k = k * 10 + j % 10;    
+//			j /= 10;
+//		}
+//		// 判断是否为回文数，如果是，则计数加一
+//		if (k == i) count++;
+//		// 根据条件打印回文数
+//		if (k == i && count == 1)
+//			printf("%d", k);
+//		if (k == i && count != 1)
+//			printf(",%d", k);
+//	}
+//}
+//int main()
+//{
+//	int n, m;
+//	scanf("%d %d", &n, &m);
+//	palindromic(n, m);
+//	return 0;
+//}
+
+//编写函数，函数的形式参数为两个整数a和b(0<a<=b),函数返回a与b之间所有整数的和。
+//要求分别用非递归和递归两种方式分别实现，并请尝试不同的递归策略。主函数中输入两个整数m和n，输出从m到n之间连续整数的和
+// 非递归实现
+//int main()
+//{
+//    int a, b, i, sum = 0;
+//    scanf("%d %d", &a, &b);
+//    for (i = a; i <= b; i++)
+//    {
+//        sum += i;
+//    }
+//    printf("%d", sum);
+//    return 0;
+//}
+
+// 递归实现
+//int SUM(int a, int b)
+//{
+//    if (a == b)  // 如果只有一个数，直接返回该数
+//        return a;
+//    else  // 否则返回当前数加上后面的所有数字之和
+//        return a + SUM(a + 1, b);
+//}
+//
+//int main()
+//{
+//    int m, n;
+//    scanf("%d%d", &m, &n);
+//    printf("%d", SUM(m, n));
+//    return 0;
+//}
+
+
+
+/*编程输出[a,b]区间内所有素数，输出格式为10个素数一行，素数间以一个空格分隔。请设计函数void prime(int a,int b)完成上述功能。
+主函数中输入若干整数对，表示有若干组数据，每组数据先输出区间，再输出区间内所有素数，每组输出间有一个空行。*/
+//我自己的思路和答案。（我的答案肯定是没有问题的，因为我的输出和标准答案是一样的。）
+//int main()
+//{
+//    int a, b, count = 0, d, e = 1, i, j;
+//        while (scanf("%d %d", &a, &b) == 2)
+//        {
+//            printf("[%d,%d]\n", a, b);
+//            for (i = a; i <= b; i++)
+//            {
+//                for (j = 2; j < i; j++)
+//                {
+//                    if (i % j == 0)
+//                    {
+//                        break;
+//                    }
+//                }
+//                if (i == j)
+//                {
+//                    count++;
+//                    printf("%d ", i);
+//                }
+//                if (count == 10)
+//                {
+//                    printf("\n");
+//                    count = 0;
+//                }
+//            }
+//            printf("\n\n");
+//            count = 0;
+//        }
+//    return 0;
+//}
+
+//标准的思路和答案
+//#include<math.h>
+//
+//void prime(int a, int b)
+//{
+//    static int k = 0; // 用于统计 prime 函数被调用的次数，静态变量可以在多次调用中保持值不变。
+//    if (k++ == 0) 
+//    { // 如果是第一次被调用，则输出闭区间信息和一个换行符。
+//        printf("[%d,%d]\n", a, b);
+//    }
+//    else 
+//    { // 否则输出一个新的闭区间信息和一个换行符。
+//        printf("\n[%d,%d]\n", a, b);
+//    }
+//
+//    int i, j, count = 0, flag = 1;
+//    for (i = a; i <= b; i++) // 遍历闭区间内的每个数字。
+//    {
+//        flag = 1; // 每次迭代都初始化 flag 标记为 1。
+//        if (i < 2)
+//            flag = 0;
+//        for (j = 2; j <= sqrt(i); j++) // 在范围内检查每个数是否为素数。
+//        {
+//            if (i % j == 0) // 如果存在因子 j 可整除，则该数字不是素数。
+//            {
+//                flag = 0;
+//                break;
+//            }
+//        }
+//        if (flag == 1) // 对于每个找到的素数，输出并统计数量，格式化输出结果。
+//        {
+//            if (count % 10 == 9)  // 每找到十个素数后换行
+//            {
+//                printf(" %d\n", i);
+//            }
+//            else if (count % 10 == 0)  // 每找到十个素数后在行首输出
+//            {
+//                printf("%d", i);
+//            }
+//            else
+//            {
+//                printf(" %d", i); // 输出素数，并以空格分隔
+//            }
+//            count++;
+//        }
+//    }
+//    if (count % 10 != 0) // 在所有数字都输出完成后，如果最后一行没有满 10 个数字，则主动插入一个换行符。
+//        printf("\n");
+//
+//    return;
+//}
+//
+//int main()
+//{
+//    int m, n;
+//    while (scanf("%d%d", &m, &n) != EOF)
+//    {
+//        prime(m, n);
+//    }
+//    return 0;
+//}
+
+//暂时先不做这个题目，等今天晚上的时候再做。
+//int main()
+//{
+//    int a, b;
+//    for (int i = 1;; i++)
+//    {
+//        scnaf("%d %d", &a, &b);
+//
+//    }
+//}
+
+
+/*对输入的算式进行简单的运算，输出算式结果。运算符只会是加+、减-、乘*、除/、求余%、阶乘！之一。
+输出运算的结果，如果出现除数为零，则输出“error”,如果求余运算的第二个运算数为0，也输出“error”。*/
+//自己写的
+//int add (int a, int b)
+//{
+//    return a + b;
+//    printf("\n");
+//}
+//int bdd (int a, int b)
+//{
+//    return a - b;
+//    printf("\n");
+//}
+//int cdd (int a, int b)
+//{
+//    return a * b;
+//    printf("\n");
+//}
+//int ddd (int a, int b)
+//{
+//    return a / b;
+//    if (b == 0)
+//    {
+//        printf("error");
+//    }
+//    printf("\n");
+//}
+//int edd (int a)
+//{
+//    return a * edd (a - 1);
+//    printf("\n");
+//}
+//int fdd(int a, int b)
+//{
+//    return a % b;
+//    if (b == 0)
+//    {
+//        printf("error");
+//    }
+//    printf("\n");
+//}
+//
+//int main()
+//{
+//    int a, b;
+//    scanf("%d + %d", &a, &b);
+//    printf("\n");
+//    printf("%d", add(a, b));
+//
+//    scanf("%d - %d", &a, &b);
+//    printf("\n");
+//    printf("%d", bdd(a, b));
+//
+//    scanf("%d * %d", &a, &b);
+//    printf("\n");
+//    printf("%d", cdd(a, b));
+//
+//    scanf("%d / %d", &a, &b);
+//    printf("\n");
+//    printf("%d", ddd(a, b));
+//
+//    scanf("%d !", &a);
+//    printf("\n");
+//    printf("%d", edd(a));
+//
+//    scanf("%d % %d", &a, &b);
+//    printf("\n");
+//    printf("%d", fdd(a, b));
+//
+//    scanf("%d    /%d", &a, &b);
+//    printf("\n");
+//    printf("%d", ddd(a, b));
+//
+//    scanf("%d/%d", &a, &b);
+//    printf("\n");
+//    printf("%d", ddd(a, b));
+//    return 0;
+//}
+
+
+// 函数的嵌套调用:
+//void new_line()
+//{
+//    printf("hehe\n");
+//}
+//void three_line()
+//{
+//    int i = 0;
+//    for (i = 0; i < 3; i++)
+//    {
+//        new_line();
+//    }
+//}
+//int main()
+//{
+//    three_line();
+//    return 0;
+//}
+
+//int main()
+//{
+//    printf("%d", printf("%d", printf("%d", 43)));
+//    //结果是啥？
+//    //注：printf函数的返回值是打印在屏幕上字符的个数
+//    return 0;
+//}
+
+//#include "add.h"
+//
+//int main()
+//{
+//    int a = 0;
+//    int b = 0;
+//    scanf("%d %d", &a, &b);
+//    int sum = Add(a, b);
+//    printf("%d", sum);
+//
+//    return 0;
+//}
+//这里很重要的一个点是进行“模块的划分”这个操作，将一个大程序分解成多个小模块，然后再将这些模块组合起来，组成一个完整的程序。
+//这样做的好处是：
+//1. 方便维护和修改，修改某个模块只需要修改该模块的代码即可，而不需要修改其他模块的代码。 
+
+//2. 方便复用，如果某个模块已经编写完成，可以直接复用，而不需要重新编写。
+
+//3. 方便测试，可以先测试某个模块，然后再测试整个程序，可以发现程序中存在的错误。
+
+//4. 方便移植，可以将程序移植到不同的平台上，只需要修改少量的代码即可。
+
+//5. 方便扩展，可以方便地添加新的功能，只需要编写新的模块即可。
+
+//6. 方便理解，可以将一个复杂的程序分解成多个小模块，每个模块都很简单，容易理解。
+
+//7. 方便重用，可以将一些经常使用的代码模块化，然后在不同的程序中复用。
+
+//8. 方便维护，可以将程序分解成多个模块，每个模块都有明确的功能，可以更好地进行维护。
+
+
+
+//递归的实现
+//void print(unsigned int n)
+//{
+//    // 递归函数，用于打印给定整数的每一位数字
+//    if (n > 9)
+//    {
+//        print(n / 10);  
+//                                      /*举个例子：打印1234，1234先进去了，但是比“9”大，进去“if”中，这时候的函数将
+//                                        1234 / 10 = 123，123 / 10 = 12，12 / 10 = 1；
+//                                        1 % 10 = 1，“1”就不会进去了，所以打印1；
+//                                        234 / 10 = 23，23 / 10 = 2，2 / 10 = 0；
+//                                        2 % 10 = 2，“2”就不会进去了，所以打印2；
+//                                        最终打印1，2，3，4*/
+//    }
+//    // 打印最后一位数字
+//    printf("%d ", n % 10);
+//} 
+//
+//int main()
+//{
+//    unsigned int n;
+//    scanf("%d", &n);
+//    print(n);
+//    return 0;
+//}
+
+
+
+
+
+//编写函数，形式参数为代表年月日的三个整数，
+//函数的功能为返回该日期是否为合法日期。主函数中输入一个日期的年月日三个整数，若为合法日期，输出YES，否则输出NO。
+//自己写的
+//void rq(int x, int y, int z)
+//{
+//    if ((x % 4 == 0 && x % 100 != 0) || x % 400 == 0)
+//    {
+//        if (y == 2)
+//        {
+//            if (z >= 1 && y <= 29)
+//            {
+//                printf("YES");
+//            }
+//        }
+//    }
+//    else if (1)
+//    {
+//        if (y == 2)
+//        {
+//            if (z >= 1 && y <= 28)
+//            {
+//                printf("YES");
+//            }
+//        }
+//    }
+//    else if (1)
+//    {
+//        if (y == 1 || y == 3 || y == 5 || y == 7 || y == 8 || y == 10 || y == 12)
+//        {
+//            if (z >= 1 && y <= 31)
+//            {
+//                printf("YES");
+//            }
+//        }
+//    }
+//    else if (1)
+//    {
+//        if (y == 2 || y == 4 || y == 6 || y == 9 || y == 11)
+//        {
+//            if (z >= 1 && y <= 30)
+//            {
+//                printf("YES");
+//            }
+//        }
+//    }
+//    else
+//    {
+//        printf("NO");
+//    }
+//}
+//int main()
+//{
+//    int x, y, z;
+//    scanf("%d %d %d", &x, &y, &z);
+//    rq(x, y, z);
+//    return 0;
+//}
+//
+////标准答案
+//int day(int y,int m,int d)
+//{
+//if (m > 0 && m < 13 && d>0 && d < 32) 
+//{
+//    if (y % 4 == 0 && y % 100 != 0 || y % 400 == 0) 
+//    {
+//        if (m == 2 && d >= 30) 
+//        {
+//            printf("NO");
+//        }
+//        if (m == 2 && d < 30) 
+//        {
+//            printf("YES");
+//        }
+//        if ((m == 4 || m == 6 || m == 9 || m == 11) && d <= 30) 
+//        {
+//            printf("YES");
+//        }
+//        if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30) 
+//        {
+//            printf("NO");
+//        }
+//        if ((m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) && d <= 31) 
+//        {
+//            printf("YES");
+//        }
+//        if ((m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) && d > 31) 
+//        {
+//            printf("NO");
+//        }
+//    }
+//    else 
+//    {
+//        if (m == 2 && d >= 29)
+//        {
+//            printf("NO");
+//        }
+//        if (m == 2 && d < 29) 
+//        {
+//            printf("YES");
+//        }
+//        if ((m == 4 || m == 6 || m == 9 || m == 11) && d <= 30) 
+//        {
+//            printf("YES");
+//        }
+//        if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30) 
+//        {
+//            printf("NO");
+//        }
+//        if ((m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) && d <= 31)
+//        {
+//            printf("YES");
+//        }
+//        if ((m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) && d > 31) 
+//        {
+//            printf("NO");
+//        }
+//    }
+//}
+//    else
+//    {
+//    printf("NO");
+//    }return 0;
+//}
+//int main(void)
+//{
+//    int y, m, d;
+//    scanf("%d%d%d", &y, &m, &d);
+//    day(y, m, d);
+//    return 0;
+//}
+//标准答案和我的答案的解题思路是一样的，但是标准答案的代码可以实现，我的不行，应该是我考虑问题不够全面的原因。
+
+
+//标准答案的思路是：
+//int hanoi_num(int n)5
+//{
+//	if (n > 1)
+//	{
+//		return 2 * hanoi_num(n - 1) + 1;
+//	}
+//	else
+//	{
+//		return 1;
+//	}
+//}
+//int main()
+//{
+//	int n;
+//	scanf("%d", &n);
+//	printf("次数为：%d", hanoi_num(n));
+//	return 0;
+//}
+
+//int main()
+//{
+//	int n, a = 1;
+//	scanf("%d", &n);
+//	for (int i = 1; i < n; i++)
+//	{
+//		a = 2 * a + 1;
+//	}
+//	printf("%d", a);
+//	return 0;	
+//}
+
+
+//int hanoi_num_iterative(int n) 
+//{
+//	int moves = 1;
+//	for (int i = 1; i < n; i++) 
+//	{
+//		moves = 2 * moves + 1;
+//	}
+//	return moves;
+//}
+//
+//int main() 
+// {
+//	int n;
+//	printf("请输入盘子的数量：");
+//	scanf("%d", &n);
+//	printf("移动次数为：%d\n", hanoi_num_iterative(n));
+//	return 0;
+//}
+
+
+//int ejz(int n)
+//{
+//    if (n > 0)
+//    {
+//        ejz(n % 2);
+//    }
+//    printf("%d", n);
+//}
+//int main()
+//{
+//    int n, ret;
+//    scanf("%d", &n);
+//    ret = ejz(n);
+//    return 0;
+//}
+
+//写个代码将三个整数按大到小输出
+//int main()
+//{
+//    int a, b, c;
+//    scanf("%d %d %d", &a, &b, &c);
+//    if (a > b && a > c)
+//    {
+//        printf("%d %d %d", a, b, c);
+//    }
+//    else if (a > b && c > b)
+//        printf("%d %d %d", a, c, b);
+//    else if (b > a && b > c)
+//        printf("%d %d %d", b, a, c);
+//    else if (b > a && c > a)
+//        printf("%d %d %d", b, c, a);
+//    else if (c > a && c > b)
+//        printf("%d %d %d", c, a, b);
+//    else if (c > a && b > a)
+//        printf("%d %d %d", c, b, a);
+//    return 0;
+//}
+//
+//
+////编写一个函数，输入三个整数，输出这三个整数按从大到小的顺序排列。标准答案
+//void sortDescending(int a, int b, int c) 
+//{
+//    if (a >= b && a >= c) 
+//    {
+//        if (b >= c) 
+//        {
+//            printf("%d, %d, %d\n", a, b, c);
+//        }
+//        else 
+//        {
+//            printf("%d, %d, %d\n", a, c, b);
+//        }
+//    }
+//    else if (b >= a && b >= c) 
+//    {
+//        if (a >= c) 
+//        {
+//            printf("%d, %d, %d\n", b, a, c);
+//        }
+//        else
+//        {
+//            printf("%d, %d, %d\n", b, c, a);
+//        }
+//    }
+//    else 
+//    {
+//        if (a >= b) 
+//        {
+//            printf("%d, %d, %d\n", c, a, b);
+//        }
+//        else 
+//        {
+//            printf("%d, %d, %d\n", c, b, a);
+//        }
+//    }
+//}
+//
+//int main() 
+//{
+//    int num1, num2, num3;
+//    printf("Enter three numbers: ");
+//    scanf("%d %d %d", &num1, &num2, &num3);
+//    sortDescending(num1, num2, num3);
+//    return 0;
+//}
+
+//这里的用“赋值符号=”进行变量交换的思想是很重要的，好好理解思考一下。
+//int main()
+//{
+//    int a, b, c;
+//    scanf("%d %d %d", &a, &b, &c);
+//    if (a < b)
+//    {
+//        int z;
+//        z = a;
+//        a = b;
+//        b = z;
+//    }
+//    if (a < c)
+//    {
+//        int z;
+//        z = a;
+//        a = c;
+//        c = z;
+//    }
+//    if (b < c)
+//    {
+//        int z;
+//        z = b;
+//        b = c;
+//        c = z;
+//    }
+//    printf("%d %d %d", a, b, c);
+//    return 0;
+//}
+
+////优化
+//void swap(int* pa, int* pb)
+//{
+//    int z;
+//    z = *pa;
+//    *pa = *pb;
+//    *pb = z;
+//}
+//int main()
+//{
+//    int a, b, c;
+//    scanf("%d %d %d", &a, &b, &c);
+//    if (a < b)
+//    {
+//        swap(&a, &b);
+//    }
+//    if (a < c)
+//    {
+//        swap(&a, &c);
+//    }
+//    if (b < c)
+//    {
+//        swap(&b, &c);
+//    }
+//    printf("%d %d %d", a, b, c);
+//    return 0;
+//}
+
+//写一个代码打印1到100所有的3的倍数
+//第一种方法：直接打印3的倍数
+//int main()
+//{
+//    int i;
+//    for (i = 3; i <= 100; i += 3)
+//    {
+//        printf("%d ", i);
+//    }
+//    return 0;
+//}
+
+////第二种方法：使用“遍历”的方法
+//int mian()
+//{
+//    int i;
+//    for (i = 1; i <= 100; i++)
+//    {
+//        if (i % 3 == 0)
+//        {
+//            printf("%d ", i);
+//        }
+//    }
+//    return 0;
+//}
+
+//给定两个数，求这两个数的最大公约数
+//int main() //暴力求解  缺点是：效率低下
+//{
+//    int a, b, c;
+//    scanf("%d %d", &a, &b);
+//    if (a > b)
+//    {
+//        int z;
+//        z = a;
+//        a = b;
+//        b = z;
+//    }
+//    for (int i = a; i <= b; i--)  //思想是：先取a和b的较小值，然后让a的值变小，直到a和b的最大公约数为止。
+//    {
+//        if (a % i == 0 && b % i == 0)  //然后这时候我要做的事情是找到a和b和i的共同点，
+//        {
+//            printf("%d", i);          //最开始可以先进行两个数字的比较，（具体的数字）然后再进行分析，
+//                                      //看看自己能分析出什么来，然后就直接进行运算就行。
+//            break;
+//        }
+//    }
+//    return 0;
+//}
+
+//辗转相处法求最大公约数 (函数实现)
+//int gcd(int a, int b)
+//{
+//    if (b == 0)
+//    {
+//        return a;
+//    }
+//    else
+//    {
+//        return gcd(b, a % b);
+//    }
+//}
+
+//int main()
+//{
+//    int a, b;
+//    scanf("%d %d", &a, &b);
+//    printf("%d", gcd(a, b));
+//    return 0;
+//}
+
+//辗转相除法求最大公约数 (非函数实现)
+//辗转相除法解释：
+//设a和b的最大公约数为d，则有：
+//a = bq + r
+//b = r
+//其中，q是整数，r是余数。
+//则有：
+//gcd(a,b) = gcd(b,r)
+//gcd(b,r) = gcd(r,q)
+//gcd(r,q) = gcd(q,0)
+//gcd(q,0) = d
+//因此，我们可以用辗转相除法求最大公约数。
+//算法：
+//1. 输入a和b。
+//2. 若a>b，则交换a和b。
+//3. 设c=a%b，则c为a和b的最大公约数。
+//4. 若c=0，则结束，最大公约数为b。
+//5. 否则，令a=b，b=c，c=a%b，转至步骤4。
+//6. 输出最大公约数。
+//int main()
+//{
+//    int a, b, c;
+//    scanf("%d %d", &a, &b);
+//    if (a > b)
+//    {
+//        int z;
+//        z = a;
+//        a = b;
+//        b = z;
+//    }
+//    c = a % b;
+//    while (c != 0)
+//    {
+//        a = b;
+//        b = c;
+//        c = a % b;
+//    }
+//    printf("%d", b);
+//    return 0;
+////}
+
+
+
+
